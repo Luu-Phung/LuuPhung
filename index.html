@@ -13,6 +13,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: column;
             min-height: 100vh;
             height: auto;
             background: linear-gradient(135deg, #00c9ff, #92fe9d);
@@ -22,12 +23,14 @@
 
         #number-container {
             display: flex;
-            gap: 20px;
+            flex-wrap: wrap;
+            gap: clamp(10px, 4vw, 20px);
             background: rgba(255, 255, 255, 0.9);
             padding: clamp(10px, 4vw, 20px);
             border-radius: 30px;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
             transition: transform 0.4s;
+            max-width: 90vw;
         }
 
         #number-container:hover {
@@ -35,14 +38,14 @@
         }
 
         .number {
-            width: clamp(50px, 8vw, 60px);
-            height: clamp(50px, 8vw, 60px);
+            width: clamp(50px, 12vw, 80px);
+            height: clamp(50px, 12vw, 80px);
             background: linear-gradient(135deg, #00c9ff, #92fe9d);
             color: #333333;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 28px;
+            font-size: clamp(18px, 4vw, 28px);
             font-weight: 600;
             cursor: grab;
             user-select: none;
@@ -62,8 +65,8 @@
         }
 
         #restart-button {
-            margin-top: 20px;
-            padding: 15px 30px;
+            margin-top: clamp(20px, 4vw, 40px);
+            padding: clamp(10px, 3vw, 20px) clamp(20px, 6vw, 40px);
             font-size: clamp(14px, 3vw, 18px);
             background-color: #00c9ff;
             color: #333;
@@ -78,38 +81,73 @@
         }
 
         h1 {
-            font-size: clamp(30px, 5vw, 40px);
+            font-size: clamp(24px, 6vw, 40px);
             color: #2f4f4f; /* Màu xám xanh đậm dịu mắt */
             text-transform: uppercase;
             text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2); /* Giảm độ chói của bóng */
             font-weight: 800;
             font-family: 'Courier New', Courier, monospace;
+            text-align: center;
+            margin: clamp(10px, 3vw, 20px);
         }
 
         button {
             text-transform: uppercase; /* In hoa toàn bộ chữ */
+        }
+
+        #start-screen {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            height: auto;
+            width: 100%;
+            max-width: 100vw;
+            overflow-x: hidden;
+            box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5);
+        }
+
+        #game-info {
+            text-align: center;
+            margin-bottom: clamp(20px, 4vw, 40px);
+        }
+
+        #timer {
+            font-size: clamp(14px, 3vw, 18px);
+            color: #333333;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        p {
+            font-size: clamp(14px, 3vw, 18px);
+            color: #333333;
+            margin: 0 auto;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+            font-style: italic;
+            text-align: center;
+            max-width: 90%;
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 </head>
 
-<body style="flex-direction: column;">
-    <div id="start-screen"
-        style="display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100vh; height: auto; background: linear-gradient(135deg, #00c9ff, #92fe9d); position: absolute; top: 0; left: 0; width: 100%; max-width: 100vw; overflow-x: hidden; box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5);">
+<body>
+    <div id="start-screen">
         <h1>✨ Sắp Xếp Dãy Số ✨</h1>
         <button onclick="startGame()"
             style="margin-top: 30px; background-color: #00c9ff; color: #333333; border: none; padding: clamp(15px, 4vw, 25px) clamp(30px, 8vw, 50px); font-size: clamp(14px, 3vw, 18px); border-radius: 15px; cursor: pointer; transition: background-color 0.3s, color 0.3s; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);">
             🎮 BẮT ĐẦU CHƠI 🎮
         </button>
     </div>
-    <div id="game-info" style="text-align: center; margin-bottom: 20px;">
-        <div id="timer"
-            style="font-size: clamp(14px, 3vw, 18px); color: #333333; margin-bottom: 15px; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);">
+    <div id="game-info">
+        <div id="timer">
             ⏱ Thời gian: <span id="time">30</span> giây
         </div>
         <h1>✨ Sắp Xếp Dãy Số ✨</h1>
-        <p style="font-size: clamp(14px, 3vw, 18px); color: #333333; margin: 0 auto; text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3); font-style: italic;">Kéo và thả các ô số để sắp xếp dãy số theo thứ tự tăng dần.</p>
+        <p>Kéo và thả các ô số để sắp xếp dãy số theo thứ tự tăng dần.</p>
     </div>
     <div id="number-container">
         <!-- Các số sẽ được tạo tự động bằng JavaScript -->
