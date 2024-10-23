@@ -36,7 +36,7 @@
 
         .number {
             width: clamp(50px, 8vw, 60px);
-            height: clamp(50px, 8vw, 60px);
+            height: clamp(35px, 8vw, 60px);
             background: linear-gradient(135deg, #00c9ff, #92fe9d);
             color: #333333;
             display: flex;
@@ -89,9 +89,34 @@
         button {
             text-transform: uppercase; /* In hoa toàn bộ chữ */
         }
+
+        /* CSS responsive cho mobile */
+        @media only screen and (max-width: 768px) {
+            #number-container {
+                /* Đổi sang cột để hiển thị tốt hơn trên mobile */
+                width: 100%;
+                gap: 15px;
+            }
+
+            body {
+                padding: 10px; /* Thêm khoảng cách để không bị tràn màn hình */
+            }
+
+            .number {
+                font-size: clamp(20px, 5vw, 28px); /* Giảm kích thước font để phù hợp với màn hình nhỏ */
+            }
+
+            #restart-button {
+                width: 100%;
+                margin-top: 15px;
+            }
+
+            #start-screen button {
+                width: 90%;
+            }
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
 </head>
 
 <body style="flex-direction: column;">
